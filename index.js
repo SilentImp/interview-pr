@@ -3,7 +3,7 @@
 const { program } = require('commander');
 const packageJSON = require("./package.json");
 require('dotenv').config();
-const { duplicateRepoAndCreatePR } = require('lib.js');
+const { duplicateRepoAndCreatePR } = require('./lib');
 
 program
   .name(packageJSON.name)
