@@ -1,6 +1,6 @@
 {
   "name": "interview-pr",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Create repository with PR and invite person to review it",
   "main": "lib.js",
   "bin": {
@@ -15,7 +15,8 @@
   "keywords": [],
   "files": [
     "utils.js",
-    "lib.js"
+    "lib.js",
+    "description.md"
   ],
   "author": "Anton Nemtsev <newsilentimp@gmail.com>",
   "license": "ISC",
