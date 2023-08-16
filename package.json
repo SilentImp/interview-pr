@@ -1,0 +1,24 @@
+{
+  "name": "interview-pr",
+  "version": "0.1.0",
+  "description": "Create repository with PR and invite person to review it",
+  "main": "lib.js",
+  "bin": {
+    "interview-pr": "index.js"
+  },
+  "scripts": {
+    "patch": "npm version patch && npm publish && git push --follow-tags",
+    "minor": "npm version minor && npm publish && git push --follow-tags",
+    "major": "npm version major && npm publish && git push --follow-tags"
+  },
+  "repository": "https://github.com/SilentImp/interview-pr",
+  "keywords": [],
+  "files": ["utils.js", "lib.js"],
+  "author": "Anton Nemtsev <newsilentimp@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "dotenv": "^16.3.1",
+    "octokit": "^3.1.0"
+  }
+}
