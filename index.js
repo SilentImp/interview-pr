@@ -37,17 +37,14 @@ program
 
       let PRDesc;
       if (desc !== undefined) {
-        console.log('PRDesc: string specified');
         PRDesc = desc;
       }
       if (descFile !== undefined) {
         const filePath = path.join(__dirname, descFile);
-        console.log('PRDesc: file specified', filePath);
         PRDesc = readFileSync(filePath, 'utf8');
       }
       if (PRDesc === undefined) {
         const filePath = path.join(__dirname, './description.md');
-        console.log('PRDesc: reading default file', filePath);
         PRDesc = readFileSync(filePath, 'utf8');
       }
 
