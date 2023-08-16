@@ -26,6 +26,8 @@ const {
  * @param {string} from - branch from which we make PR
  * @param {string} to - branch to which we make PR
  * @param {string} localPathToRepo - where to clone repo, excluding repo name
+ * @param {string} PRTitle - PR title
+ * @param {string} PRDesc - PR description in markdown format
  */
 
 const duplicateRepoAndCreatePR = async ({
@@ -37,7 +39,9 @@ const duplicateRepoAndCreatePR = async ({
   target,
   from,
   to,
-  localPathToRepo
+  localPathToRepo,
+  PRTitle,
+  PRDesc,
 }) => {
 
   const credentials = `${username}:${token}`;
@@ -73,6 +77,8 @@ const duplicateRepoAndCreatePR = async ({
     repo: target,
     head: from,
     base: to,
+    title: PRTitle,
+    body: PRDesc,
   });
 
   await addCollaborator(octokit)({

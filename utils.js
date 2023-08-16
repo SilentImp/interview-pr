@@ -19,7 +19,7 @@ const create = (octokit) => async ({
   })
 };
 
-const makePullRequest = (octokit) => async ({ owner, repo, head='feature', base='main', title = 'New feature', body = 'Please review this code'}) => {
+const makePullRequest = (octokit) => async ({ owner, repo, head='feature', base='main', title, body}) => {
   const result = await octokit.request(`POST /repos/${owner}/${repo}/pulls`, {
     owner,
     repo,
