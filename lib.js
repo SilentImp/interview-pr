@@ -90,12 +90,16 @@ const duplicateRepoAndCreatePR = async ({
 
   fs.rmSync(options.cwd, { recursive: true, force: true });
 
-  await inviteReviewer(octokit)({
-    pullNumber,
-    reviewers: curator,
-    owner,
-    repo: target,
-  });
+  try {
+    await inviteReviewer(octokit)({
+      pullNumber,
+      reviewers: curator,
+      owner,
+      repo: target,
+    });
+  } catch (error) {
+    // Не можна додати ревьювером людину яка ще не прийняла запрошення у репозиторій
+  }
 };
 
 module.exports = {
