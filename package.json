@@ -1,6 +1,6 @@
 {
   "name": "interview-pr",
-  "version": "0.3.5",
+  "version": "1.0.0",
   "description": "Create repository with PR and invite person to review it",
   "main": "lib.js",
   "bin": {

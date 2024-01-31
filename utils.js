@@ -7,8 +7,6 @@ const createByTemplate = (octokit) => async ({
   description='Test task for a curator',
 }) => {
   const result = await octokit.request(`POST /repos/${org}/${sourceName}/generate`, {
-    template_owner: org,
-    template_repo: sourceName,
     owner: org,
     name: targetName,
     description,
