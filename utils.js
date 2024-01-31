@@ -1,11 +1,33 @@
 const { spawnSync } = require('node:child_process');
 
+const createByTemplate = (octokit) => async ({
+  targetName,
+  org,
+  sourceName = 'curator',
+  description='Test task for a curator',
+}) => {
+  const result = await octokit.request(`POST /repos/${org}/${sourceName}/generate`, {
+    template_owner: org,
+    template_repo: sourceName,
+    owner: org,
+    name: targetName,
+    description,
+    include_all_branches: false,
+    'private': true,
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  });
+  if (result.status !== 201) throw result;
+  return result;
+};
+
 const create = (octokit) => async ({
   name,
   org,
   description='Code Review',
 }) => {
-  await octokit.request(`POST /orgs/${org}/repos`, {
+  return await octokit.request(`POST /orgs/${org}/repos`, {
     org,
     name,
     description,
@@ -16,7 +38,7 @@ const create = (octokit) => async ({
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
-  })
+  });
 };
 
 const makePullRequest = (octokit) => async ({ owner, repo, head='feature', base='main', title, body}) => {
@@ -134,4 +156,5 @@ module.exports = {
   fetchAll,
   checkout,
   switchOrigin,
+  createByTemplate,
 };

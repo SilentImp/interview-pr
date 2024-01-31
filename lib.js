@@ -13,6 +13,7 @@ const {
   fetchAll,
   checkout,
   switchOrigin,
+  createByTemplate,
 } = require('./utils.js');
 
 /**
@@ -102,6 +103,41 @@ const duplicateRepoAndCreatePR = async ({
   }
 };
 
+/**
+ * This method create a copy of repo and make a pull request between 2 branches
+ * @param {string} token - token to use GitHub API
+ * @param {string} curator - user who should do the review
+ * @param {string} owner - org or user in which repos will be located
+ * @param {string} source - repo, which we copy
+ * @param {string} target - name of repo we create
+ */
+
+const duplicateRepo = async ({
+  token,
+  curator,
+  owner,
+  source,
+  target,
+}) => {
+  const octokit = new Octokit({
+    auth: token,
+  });
+
+  await createByTemplate(octokit)({
+    sourceName: source,
+    targetName: target,
+    org: owner,
+  });
+
+  await addCollaborator(octokit)({
+    owner,
+    repo: target,
+    collaborator: curator,
+    permission: 'maintain',
+  });
+};
+
 module.exports = {
-  duplicateRepoAndCreatePR
+  duplicateRepoAndCreatePR,
+  duplicateRepo,
 };
