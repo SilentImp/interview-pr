@@ -68,7 +68,6 @@ const duplicateRepoAndCreatePR = async ({
     org: owner,
   });
 
-
   clone(target, owner, credentials);
   switchOrigin(source, owner, credentials, options);
   fetchAll(options);
@@ -146,12 +145,16 @@ const duplicateRepo = async ({
     org: owner,
   });
 
+  console.log('y')
+
   await addCollaborator(octokit)({
     owner,
     repo: target,
     collaborator: curator,
     permission: 'maintain',
   });
+
+  console.log('z')
 
   return [{
     type: "Посилання на репозиторій",
